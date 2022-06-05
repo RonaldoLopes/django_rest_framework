@@ -13,6 +13,7 @@ class Base(models.Model):
 class Curso(Base):
     titulo = models.CharField(max_length=255)
     url = models.URLField(unique=True)
+    ordering = ["id"]
 
     class Meta:
         verbose_name = "Curso"
@@ -30,6 +31,7 @@ class Avaliacao(Base):
     email = models.EmailField()
     comentario = models.TextField(blank=True, default="")
     avaliacao = models.DecimalField(max_digits=2, decimal_places=1)
+    ordering = ["id"]
 
     class Meta:
         verbose_name = "Avaliação"
