@@ -1,0 +1,20 @@
+ronaldo
+4dm1nR1sc#
+1. criar virtual env
+    1.1 python3.9 -m venv venv
+    1.2 ./venv/bin/activate ou . venv/bin/activate
+
+    python manage.py runserver
+
+
+django-admin startproject escola .
+django-admin startapp cursos
+
+1. pip install django
+2. pip install djangorestframework
+3. pip install markdown
+4. pip install django-filter
+pip install django-cors-headers
+5. django-admin startproject setup .
+
+
