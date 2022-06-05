@@ -1,4 +1,5 @@
 from rest_framework import serializers
+from django.db.models import Avg
 from .models import Curso, Avaliacao
 
 
@@ -26,9 +27,24 @@ class CursoSerializer(serializers.ModelSerializer):
     avaliacoes = serializers.HyperlinkedRelatedField(
         many=True, read_only=True, view_name="avaliacao-detail"
     )
+    media_avaliacoes = serializers.SerializerMethodField()
     # primary key related Field
     # avaliacoes = serializers.PrimaryKeyRelatedField(many=True, read_only=True)
 
     class Meta:
         model = Curso
-        fields = ("id", "titulo", "url", "criacao", "ativo", "avaliacoes")
+        fields = (
+            "id",
+            "titulo",
+            "url",
+            "criacao",
+            "ativo",
+            "avaliacoes",
+            "media_avaliacoes",
+        )
+
+    def get_media_avaliacoes(self, obj):
+        media = obj.avaliacoes.all().aggregate(media=Avg("avaliacao"))["media"]
+        if media is None:
+            return 0
+        return media
